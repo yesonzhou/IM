@@ -1,4 +1,4 @@
-package com.yeson.nettyIM.server;/**
+package com.yeson.nettyIM.server.handler;/**
  * The demo is created by yesonzhou on 2019/1/16 17:26
  * Note: ***
  */

@@ -5,9 +5,13 @@ package com.yeson.nettyIM.server;
  * Note: ***
  */
 
-import com.yeson.nettyIM.client.FirstClientHandler;
+import com.yeson.nettyIM.codec.PacketDecoder;
+import com.yeson.nettyIM.codec.PacketEncoder;
+import com.yeson.nettyIM.codec.Spliter;
+import com.yeson.nettyIM.server.handler.*;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -27,9 +31,30 @@ public class NettyServer {
         serverBootstrap
                 .group(bossGroup, workerGroup)
                 .channel(NioServerSocketChannel.class)
+                .option(ChannelOption.SO_BACKLOG, 1024)
+                .childOption(ChannelOption.SO_KEEPALIVE, true)
+                .childOption(ChannelOption.TCP_NODELAY, true)
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     protected void initChannel(NioSocketChannel ch) {
                         ch.pipeline().addLast(new FirstServerHandler());
+                        ch.pipeline().addLast(new Spliter());
+                        ch.pipeline().addLast(new PacketDecoder());
+                        // 登录请求处理器
+                        ch.pipeline().addLast(new LoginRequestHandler());
+                        ch.pipeline().addLast(new AuthHandler());
+                        // 单聊消息请求处理器
+                        ch.pipeline().addLast(new MessageRequestHandler());
+                        // 创建群请求处理器
+                        ch.pipeline().addLast(new CreateGroupRequestHandler());
+                        // 加群请求处理器
+                        ch.pipeline().addLast(new JoinGroupRequestHandler());
+                        // 退群请求处理器
+                        ch.pipeline().addLast(new QuitGroupRequestHandler());
+                        // 获取群成员请求处理器
+                        ch.pipeline().addLast(new ListGroupMembersRequestHandler());
+                        // 登出请求处理器
+                        ch.pipeline().addLast(new LogoutRequestHandler());
+                        ch.pipeline().addLast(new PacketEncoder());
                     }
                 });
 
