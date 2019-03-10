@@ -1,6 +1,6 @@
 package com.yeson.nettyIM.codec;
 
-import com.yeson.nettyIM.protocol.Packet;
+import com.yeson.nettyIM.protocol.packet.Packet;
 import com.yeson.nettyIM.protocol.PacketCodec;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;

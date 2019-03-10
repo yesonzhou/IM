@@ -1,6 +1,6 @@
 package com.yeson.nettyIM.client.console;
 
-import com.yeson.nettyIM.protocol.request.CreateGroupRequestPacket;
+import com.yeson.nettyIM.protocol.packet.request.CreateGroupRequestPacket;
 import io.netty.channel.Channel;
 
 import java.util.Arrays;

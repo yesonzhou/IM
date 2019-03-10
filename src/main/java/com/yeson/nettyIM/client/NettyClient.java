@@ -7,7 +7,10 @@ package com.yeson.nettyIM.client;
 
 import com.yeson.nettyIM.client.console.ConsoleCommandManager;
 import com.yeson.nettyIM.client.console.LoginConsoleCommand;
-import com.yeson.nettyIM.client.handler.FirstClientHandler;
+import com.yeson.nettyIM.client.handler.*;
+import com.yeson.nettyIM.codec.PacketDecoder;
+import com.yeson.nettyIM.codec.PacketEncoder;
+import com.yeson.nettyIM.codec.Spliter;
 import com.yeson.nettyIM.util.SessionUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
@@ -28,7 +31,7 @@ import java.util.concurrent.TimeUnit;
 
 public class NettyClient {
     private static final int MAX_RETRY = 5;
-    private static final String HOST = "127.0.0.1";
+    private static final String HOST = "129.204.75.206"; // 127.0.0.1
     private static final int PORT = 8000;
 
     public static void main(String[] args) {
@@ -49,7 +52,23 @@ public class NettyClient {
                     @Override
                     public void initChannel(SocketChannel ch) {
                         // 指定连接数据读写逻辑
-                        ch.pipeline().addLast(new FirstClientHandler());
+                        ch.pipeline().addLast(new Spliter());
+                        ch.pipeline().addLast(new PacketDecoder());
+                        // 登录响应处理器
+                        ch.pipeline().addLast(new LoginResponseHandler());
+                        // 收消息处理器
+                        ch.pipeline().addLast(new MessageResponseHandler());
+                        // 创建群响应处理器
+                        ch.pipeline().addLast(new CreateGroupResponseHandler());
+                        // 加群响应处理器
+                        ch.pipeline().addLast(new JoinGroupResponseHandler());
+                        // 退群响应处理器
+                        ch.pipeline().addLast(new QuitGroupResponseHandler());
+                        // 获取群成员响应处理器
+                        ch.pipeline().addLast(new ListGroupMembersResponseHandler());
+                        // 登出响应处理器
+                        ch.pipeline().addLast(new LogoutResponseHandler());
+                        ch.pipeline().addLast(new PacketEncoder());
                     }
                 });
 
@@ -87,6 +106,7 @@ public class NettyClient {
     private static void startConsoleThread(Channel channel) {
         ConsoleCommandManager consoleCommandManager = new ConsoleCommandManager();
         LoginConsoleCommand loginConsoleCommand = new LoginConsoleCommand();
+        // todo 将控制台输入改成安卓端行为接入
         Scanner scanner = new Scanner(System.in);
 
         new Thread(() -> {

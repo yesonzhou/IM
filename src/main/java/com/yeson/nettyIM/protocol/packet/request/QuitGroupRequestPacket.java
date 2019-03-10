@@ -1,6 +1,6 @@
-package com.yeson.nettyIM.protocol.request;
+package com.yeson.nettyIM.protocol.packet.request;
 
-import com.yeson.nettyIM.protocol.Packet;
+import com.yeson.nettyIM.protocol.packet.Packet;
 import com.yeson.nettyIM.protocol.command.Command;
 import lombok.Data;
 

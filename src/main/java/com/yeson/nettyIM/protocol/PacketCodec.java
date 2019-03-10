@@ -1,7 +1,8 @@
 package com.yeson.nettyIM.protocol;
 
-import com.yeson.nettyIM.protocol.request.*;
-import com.yeson.nettyIM.protocol.response.*;
+import com.yeson.nettyIM.protocol.packet.Packet;
+import com.yeson.nettyIM.protocol.packet.request.*;
+import com.yeson.nettyIM.protocol.packet.response.*;
 import com.yeson.nettyIM.protocol.serialize.Serializer;
 import static com.yeson.nettyIM.protocol.command.Command.*;
 

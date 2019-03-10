@@ -1,6 +1,5 @@
 package com.yeson.nettyIM.client.console;
 
-import com.yeson.nettyIM.util.SessionUtil;
 import io.netty.channel.Channel;
 
 import java.util.HashMap;
@@ -18,23 +17,11 @@ public class ConsoleCommandManager implements ConsoleCommand {
         consoleCommandMap.put("joinGroup", new JoinGroupConsoleCommand());
         consoleCommandMap.put("quitGroup", new QuitGroupConsoleCommand());
         consoleCommandMap.put("listGroupMembers", new ListGroupMembersConsoleCommand());
+        consoleCommandMap.put("addBuddy",new AddBuddyConsoleCommand());
+        consoleCommandMap.put("addBuddyAsk",new AddBuddyAskConsole());
     }
 
     @Override
     public void exec(Scanner scanner, Channel channel) {
-        //  获取第一个指令
-        String command = scanner.next();
-
-        if (!SessionUtil.hasLogin(channel)) {
-            return;
-        }
-
-        ConsoleCommand consoleCommand = consoleCommandMap.get(command);
-
-        if (consoleCommand != null) {
-            consoleCommand.exec(scanner, channel);
-        } else {
-            System.err.println("无法识别[" + command + "]指令，请重新输入!");
-        }
     }
 }

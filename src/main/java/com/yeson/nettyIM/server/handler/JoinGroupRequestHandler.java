@@ -1,11 +1,12 @@
 package com.yeson.nettyIM.server.handler;
 
+import com.yeson.nettyIM.protocol.packet.request.JoinGroupRequestPacket;
+import com.yeson.nettyIM.protocol.packet.response.JoinGroupResponsePacket;
+import com.yeson.nettyIM.util.SessionUtil;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
-import the.flash.protocol.request.JoinGroupRequestPacket;
-import the.flash.protocol.response.JoinGroupResponsePacket;
-import the.flash.util.SessionUtil;
+
 
 public class JoinGroupRequestHandler extends SimpleChannelInboundHandler<JoinGroupRequestPacket> {
     @Override

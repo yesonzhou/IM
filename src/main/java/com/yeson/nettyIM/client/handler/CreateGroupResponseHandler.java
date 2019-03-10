@@ -1,6 +1,6 @@
 package com.yeson.nettyIM.client.handler;
 
-import com.yeson.nettyIM.protocol.response.CreateGroupResponsePacket;
+import com.yeson.nettyIM.protocol.packet.response.CreateGroupResponsePacket;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 

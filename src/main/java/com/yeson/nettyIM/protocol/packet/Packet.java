@@ -1,4 +1,4 @@
-package com.yeson.nettyIM.protocol;
+package com.yeson.nettyIM.protocol.packet;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;

@@ -18,11 +18,15 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 
+import java.util.Date;
+
 /**
  * ---------------------------------*、****------------------------------------------
  */
 
 public class NettyServer {
+    private static final int PORT = 8000;
+
     public static void main(String[] args) {
         NioEventLoopGroup bossGroup = new NioEventLoopGroup();
         NioEventLoopGroup workerGroup = new NioEventLoopGroup();
@@ -36,7 +40,6 @@ public class NettyServer {
                 .childOption(ChannelOption.TCP_NODELAY, true)
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     protected void initChannel(NioSocketChannel ch) {
-                        ch.pipeline().addLast(new FirstServerHandler());
                         ch.pipeline().addLast(new Spliter());
                         ch.pipeline().addLast(new PacketDecoder());
                         // 登录请求处理器
@@ -58,13 +61,15 @@ public class NettyServer {
                     }
                 });
 
-        serverBootstrap.bind(8000).addListener(new GenericFutureListener<Future<? super Void>>() {
-            public void operationComplete(Future<? super Void> future) {
-                if (future.isSuccess()) {
-                    System.out.println("端口绑定成功!");
-                } else {
-                    System.err.println("端口绑定失败!");
-                }
+        bind(serverBootstrap, PORT);
+    }
+
+    private static void bind(final ServerBootstrap serverBootstrap, final int port) {
+        serverBootstrap.bind(port).addListener(future -> {
+            if (future.isSuccess()) {
+                System.out.println(new Date() + ": 端口[" + port + "]绑定成功!");
+            } else {
+                System.err.println("端口[" + port + "]绑定失败!");
             }
         });
     }

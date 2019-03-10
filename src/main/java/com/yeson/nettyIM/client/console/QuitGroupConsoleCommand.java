@@ -1,6 +1,6 @@
 package com.yeson.nettyIM.client.console;
 
-import com.yeson.nettyIM.protocol.request.QuitGroupRequestPacket;
+import com.yeson.nettyIM.protocol.packet.request.QuitGroupRequestPacket;
 import io.netty.channel.Channel;
 import java.util.Scanner;
 

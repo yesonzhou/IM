@@ -1,7 +1,7 @@
 package com.yeson.nettyIM.server.handler;
 
-import com.yeson.nettyIM.protocol.request.LogoutRequestPacket;
-import com.yeson.nettyIM.protocol.response.LogoutResponsePacket;
+import com.yeson.nettyIM.protocol.packet.request.LogoutRequestPacket;
+import com.yeson.nettyIM.protocol.packet.response.LogoutResponsePacket;
 import com.yeson.nettyIM.util.SessionUtil;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;

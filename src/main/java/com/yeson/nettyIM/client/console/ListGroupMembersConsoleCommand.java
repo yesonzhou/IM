@@ -1,6 +1,6 @@
 package com.yeson.nettyIM.client.console;
 
-import com.yeson.nettyIM.protocol.request.ListGroupMembersRequestPacket;
+import com.yeson.nettyIM.protocol.packet.request.ListGroupMembersRequestPacket;
 import io.netty.channel.Channel;
 import java.util.Scanner;
 

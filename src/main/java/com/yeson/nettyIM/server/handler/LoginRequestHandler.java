@@ -1,13 +1,12 @@
 package com.yeson.nettyIM.server.handler;
 
+import com.yeson.nettyIM.protocol.packet.request.LoginRequestPacket;
+import com.yeson.nettyIM.protocol.packet.response.LoginResponsePacket;
+import com.yeson.nettyIM.session.Session;
+import com.yeson.nettyIM.util.IDUtil;
+import com.yeson.nettyIM.util.SessionUtil;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import the.flash.protocol.request.LoginRequestPacket;
-import the.flash.protocol.response.LoginResponsePacket;
-import the.flash.session.Session;
-import the.flash.util.IDUtil;
-import the.flash.util.SessionUtil;
-
 import java.util.Date;
 
 public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginRequestPacket> {

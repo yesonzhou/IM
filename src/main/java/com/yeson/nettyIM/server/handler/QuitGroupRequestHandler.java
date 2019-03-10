@@ -1,7 +1,7 @@
 package com.yeson.nettyIM.server.handler;
 
-import com.yeson.nettyIM.protocol.request.QuitGroupRequestPacket;
-import com.yeson.nettyIM.protocol.response.QuitGroupResponsePacket;
+import com.yeson.nettyIM.protocol.packet.request.QuitGroupRequestPacket;
+import com.yeson.nettyIM.protocol.packet.response.QuitGroupResponsePacket;
 import com.yeson.nettyIM.util.SessionUtil;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;

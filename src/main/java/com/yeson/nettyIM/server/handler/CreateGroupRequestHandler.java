@@ -1,7 +1,7 @@
 package com.yeson.nettyIM.server.handler;
 
-import com.yeson.nettyIM.protocol.request.CreateGroupRequestPacket;
-import com.yeson.nettyIM.protocol.response.CreateGroupResponsePacket;
+import com.yeson.nettyIM.protocol.packet.request.CreateGroupRequestPacket;
+import com.yeson.nettyIM.protocol.packet.response.CreateGroupResponsePacket;
 import com.yeson.nettyIM.util.IDUtil;
 import com.yeson.nettyIM.util.SessionUtil;
 import io.netty.channel.Channel;
