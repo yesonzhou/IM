@@ -11,6 +11,7 @@ import com.yeson.nettyIM.client.handler.*;
 import com.yeson.nettyIM.codec.PacketDecoder;
 import com.yeson.nettyIM.codec.PacketEncoder;
 import com.yeson.nettyIM.codec.Spliter;
+import com.yeson.nettyIM.handler.IMIdleStateHandler;
 import com.yeson.nettyIM.util.SessionUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
@@ -51,6 +52,8 @@ public class NettyClient {
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     public void initChannel(SocketChannel ch) {
+                        // 空闲检测
+                        ch.pipeline().addLast(new IMIdleStateHandler());
                         // 指定连接数据读写逻辑
                         ch.pipeline().addLast(new Spliter());
                         ch.pipeline().addLast(new PacketDecoder());

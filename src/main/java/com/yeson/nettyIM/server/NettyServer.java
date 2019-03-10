@@ -8,6 +8,7 @@ package com.yeson.nettyIM.server;
 import com.yeson.nettyIM.codec.PacketDecoder;
 import com.yeson.nettyIM.codec.PacketEncoder;
 import com.yeson.nettyIM.codec.Spliter;
+import com.yeson.nettyIM.handler.IMIdleStateHandler;
 import com.yeson.nettyIM.server.handler.*;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
@@ -40,6 +41,7 @@ public class NettyServer {
                 .childOption(ChannelOption.TCP_NODELAY, true)
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     protected void initChannel(NioSocketChannel ch) {
+                        ch.pipeline().addLast(new IMIdleStateHandler());
                         ch.pipeline().addLast(new Spliter());
                         ch.pipeline().addLast(new PacketDecoder());
                         // 登录请求处理器

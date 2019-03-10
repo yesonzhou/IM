@@ -43,6 +43,5 @@ public interface Command {
     Byte MODIFY_ACCOUNT_RESPONSE = 20;
 
 
-
-
+    Byte HEARTBEAT_REQUEST = 21;
 }
