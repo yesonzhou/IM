@@ -1,5 +1,7 @@
 package com.yeson.nettyIM.protocol.command;
 
+import com.sun.beans.editors.ByteEditor;
+
 public interface Command {
 
     Byte LOGIN_REQUEST = 1;
@@ -42,6 +44,13 @@ public interface Command {
 
     Byte MODIFY_ACCOUNT_RESPONSE = 20;
 
-
     Byte HEARTBEAT_REQUEST = 21;
+
+    Byte LIST_BUDDIES_REQUEST = 22;
+
+    Byte LIST_BUDDIES_RESPONSE = 23;
+
+    Byte REGISTER_REQUEST = 24;
+
+    Byte REGISTER_RESPONSE = 25;
 }

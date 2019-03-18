@@ -47,6 +47,7 @@ public class NettyServer {
                         // 登录请求处理器
                         ch.pipeline().addLast(new LoginRequestHandler());
                         ch.pipeline().addLast(new AuthHandler());
+                        ch.pipeline().addLast(new ListBuddiesRequestHandler());
                         // 单聊消息请求处理器
                         ch.pipeline().addLast(new MessageRequestHandler());
                         // 创建群请求处理器
