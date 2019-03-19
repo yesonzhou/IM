@@ -1,16 +1,18 @@
 package com.yeson.nettyIM.protocol;
 
+import com.sun.istack.internal.Nullable;
 import com.yeson.nettyIM.protocol.packet.Packet;
 import com.yeson.nettyIM.protocol.packet.request.*;
 import com.yeson.nettyIM.protocol.packet.response.*;
 import com.yeson.nettyIM.protocol.serialize.Serializer;
+
 import static com.yeson.nettyIM.protocol.command.Command.*;
 
 import com.yeson.nettyIM.protocol.serialize.impl.JSONSerializer;
 import io.netty.buffer.ByteBuf;
+
 import java.util.HashMap;
 import java.util.Map;
-
 
 
 public class PacketCodec {
@@ -38,6 +40,10 @@ public class PacketCodec {
         packetTypeMap.put(QUIT_GROUP_RESPONSE, QuitGroupResponsePacket.class);
         packetTypeMap.put(LIST_GROUP_MEMBERS_REQUEST, ListGroupMembersRequestPacket.class);
         packetTypeMap.put(LIST_GROUP_MEMBERS_RESPONSE, ListGroupMembersResponsePacket.class);
+        packetTypeMap.put(LIST_BUDDIES_REQUEST, ListBuddiesRequestPacket.class);
+        packetTypeMap.put(LIST_BUDDIES_RESPONSE, ListBuddiesResponsePacket.class);
+        packetTypeMap.put(REGISTER_REQUEST, RegisterRequestPacket.class);
+        packetTypeMap.put(REGISTER_RESPONSE, RegisterResponsePacket.class);
 
         serializerMap = new HashMap<>();
         Serializer serializer = new JSONSerializer();
@@ -92,8 +98,8 @@ public class PacketCodec {
         return serializerMap.get(serializeAlgorithm);
     }
 
+    @Nullable
     private Class<? extends Packet> getRequestType(byte command) {
-
         return packetTypeMap.get(command);
     }
 }

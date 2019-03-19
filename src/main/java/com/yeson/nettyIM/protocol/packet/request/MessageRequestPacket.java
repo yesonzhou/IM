@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class MessageRequestPacket extends Packet {
-    private String toUserId;
+    private String toUserName;
     private String message;
 
-    public MessageRequestPacket(String toUserId, String message) {
-        this.toUserId = toUserId;
+    public MessageRequestPacket(String toUserName, String message) {
+        this.toUserName = toUserName;
         this.message = message;
     }
 

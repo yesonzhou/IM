@@ -21,7 +21,9 @@ public class MessageRequestHandler extends SimpleChannelInboundHandler<MessageRe
         messageResponsePacket.setFromUserName(session.getUserName());
         messageResponsePacket.setMessage(messageRequestPacket.getMessage());
 
-        // 3.拿到消息接收方的 channel
+        //todo:需要重新实现
+
+        /*// 3.拿到消息接收方的 channel
         Channel toUserChannel = SessionUtil.getChannel(messageRequestPacket.getToUserId());
 
         // 4.将消息发送给消息接收方
@@ -29,6 +31,6 @@ public class MessageRequestHandler extends SimpleChannelInboundHandler<MessageRe
             toUserChannel.writeAndFlush(messageResponsePacket);
         } else {
             System.err.println("[" + messageRequestPacket.getToUserId() + "] 不在线，发送失败!");
-        }
+        }*/
     }
 }
