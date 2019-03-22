@@ -53,4 +53,8 @@ public interface Command {
     Byte REGISTER_REQUEST = 24;
 
     Byte REGISTER_RESPONSE = 25;
+
+    Byte HEARTBEAT_RESPONSE = 26;
+
+
 }

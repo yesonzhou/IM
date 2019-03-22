@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class ListBuddiesRequestPacket extends Packet {
 
-    private String userName;//查找该userName的好友
+    private String userName;  //查找该userName的好友
 
     public ListBuddiesRequestPacket(String userName) {
         this.userName = userName;
