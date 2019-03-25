@@ -1,7 +1,7 @@
 package com.yeson.nettyIM.protocol.packet.request;
 
-import com.yeson.nettyIM.protocol.packet.Packet;
 import com.yeson.nettyIM.protocol.command.Command;
+import com.yeson.nettyIM.protocol.packet.Packet;
 import lombok.Data;
 
 /**
@@ -10,7 +10,8 @@ import lombok.Data;
 
 @Data
 public class AddBuddyRequestPacket extends Packet {
-    String buddyId;
+
+    private String buddyName;
 
     @Override
     public Byte getCommand() {

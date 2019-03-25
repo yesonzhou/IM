@@ -1,6 +1,7 @@
 package com.yeson.nettyIM.client.console;
 
 import com.yeson.nettyIM.protocol.packet.request.AddBuddyRequestPacket;
+import com.yeson.nettyIM.util.LogUtils;
 import io.netty.channel.Channel;
 
 import java.util.Scanner;
@@ -12,11 +13,11 @@ import java.util.Scanner;
 public class AddBuddyConsoleCommand implements ConsoleCommand {
     @Override
     public void exec(Scanner scanner, Channel channel) {
-        System.out.println("【添加好友】输入 userId ：");
+        LogUtils.p("【添加好友】输入 userId ：");
         String buddyId = scanner.next();
 
         AddBuddyRequestPacket addBuddyRequestPacket = new AddBuddyRequestPacket();
-        addBuddyRequestPacket.setBuddyId(buddyId);
+        addBuddyRequestPacket.setBuddyName(buddyId);
         channel.writeAndFlush(addBuddyRequestPacket);
     }
 }

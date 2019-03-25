@@ -23,7 +23,7 @@ public class SessionUtil {
             Session session = getSession(channel);
             userIdChannelMap.remove(session.getUserId());
             channel.attr(Attributes.SESSION).set(null);
-            System.out.println(session + " 退出登录!");
+            LogUtils.p(session + "退出登录!");
         }
     }
 

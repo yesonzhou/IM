@@ -1,6 +1,6 @@
 package com.yeson.nettyIM.client.console;
 
-import com.yeson.nettyIM.protocol.packet.request.RegisterRequestPacket;
+import com.yeson.nettyIM.util.LogUtils;
 import com.yeson.nettyIM.util.SessionUtil;
 import io.netty.channel.Channel;
 
@@ -14,6 +14,7 @@ public class ConsoleCommandManager implements ConsoleCommand {
 
     public ConsoleCommandManager() {
         consoleCommandMap = new HashMap<>();
+        consoleCommandMap.put("help", new HelpConsoleCommand());//输出所有指令名方便输入
         consoleCommandMap.put("sendToUser", new SendToUserConsoleCommand());
         consoleCommandMap.put("logout", new LogoutConsoleCommand());
         consoleCommandMap.put("createGroup", new CreateGroupConsoleCommand());
@@ -21,7 +22,7 @@ public class ConsoleCommandManager implements ConsoleCommand {
         consoleCommandMap.put("quitGroup", new QuitGroupConsoleCommand());
         consoleCommandMap.put("listGroupMembers", new ListGroupMembersConsoleCommand());
         consoleCommandMap.put("addBuddy", new AddBuddyConsoleCommand());
-        consoleCommandMap.put("addBuddyAsk", new AddBuddyAskConsole());
+        consoleCommandMap.put("addBuddyAsk", new AddBuddyAskConsoleCommand());
         consoleCommandMap.put("register", new RegisterConsoleCommand());
         consoleCommandMap.put("listBuddies", new ListBuddiesConsoleCommand());
     }
@@ -39,8 +40,20 @@ public class ConsoleCommandManager implements ConsoleCommand {
 
         if (consoleCommand != null) {
             consoleCommand.exec(scanner, channel);
+            LogUtils.p("命令[" + command + "]已执行");
         } else {
-            System.err.println("无法识别[" + command + "]指令，请重新输入!");
+            LogUtils.p("无法识别[" + command + "]指令，请重新输入!");
+        }
+    }
+
+    private class HelpConsoleCommand implements ConsoleCommand {
+
+        @Override
+        public void exec(Scanner scanner, Channel channel) {
+            System.out.println("系统支持指令表：");
+            for (String command : consoleCommandMap.keySet()) {
+                System.out.println("["+command+"]");
+            }
         }
     }
 }

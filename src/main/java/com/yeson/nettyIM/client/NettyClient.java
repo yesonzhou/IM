@@ -11,8 +11,7 @@ import com.yeson.nettyIM.client.handler.*;
 import com.yeson.nettyIM.codec.PacketDecoder;
 import com.yeson.nettyIM.codec.PacketEncoder;
 import com.yeson.nettyIM.codec.Spliter;
-import com.yeson.nettyIM.handler.IMIdleStateHandler;
-import com.yeson.nettyIM.server.handler.ListBuddiesRequestHandler;
+import com.yeson.nettyIM.util.LogUtils;
 import com.yeson.nettyIM.util.SessionUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
@@ -23,7 +22,6 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
-import java.util.Date;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -54,14 +52,20 @@ public class NettyClient {
                     @Override
                     public void initChannel(SocketChannel ch) {
                         // 空闲检测
-                        ch.pipeline().addLast(new IMIdleStateHandler());
+                        //ch.pipeline().addLast(new IMIdleStateHandler());
                         // 指定连接数据读写逻辑
                         ch.pipeline().addLast(new Spliter());
                         ch.pipeline().addLast(new PacketDecoder());
                         // 登录响应处理器
                         ch.pipeline().addLast(new LoginResponseHandler());
+                        // 心跳包
+                        ch.pipeline().addLast(new HeartBeatTimerHandler());
                         // 获取用户的好友列表
                         ch.pipeline().addLast(new ListBuddiesResponseHandler());
+                        // 好友请求结果
+                        ch.pipeline().addLast(new AddBuddyAskResponseHandler());
+                        // 接收好友请求
+                        ch.pipeline().addLast(new AddBuddyResponseHandler());
                         // 收消息处理器
                         ch.pipeline().addLast(new MessageResponseHandler());
                         // 创建群响应处理器
@@ -91,17 +95,17 @@ public class NettyClient {
          */
         bootstrap.connect(host, port).addListener(future -> {
             if (future.isSuccess()) {
-                System.out.println(new Date() + ": 连接成功，启动控制台线程……");
+                LogUtils.p("连接成功，启动控制台线程……");
                 Channel channel = ((ChannelFuture) future).channel();
                 startConsoleThread(channel);
             } else if (retry == 0) {
-                System.err.println("重试次数已用完，放弃连接！");
+                LogUtils.p("重试次数已用完，放弃连接！");
             } else {
                 // 第几次重连
                 int order = (MAX_RETRY - retry) + 1;
                 // 本次重连的间隔
                 int delay = 1 << order;
-                System.err.println(new Date() + ": 连接失败，第" + order + "次重连……");
+                LogUtils.p("连接失败，第" + order + "次重连……");
                 bootstrap.config().group().schedule(() -> connect(bootstrap, host, port, retry - 1), delay, TimeUnit
                         .SECONDS);
             }
@@ -109,10 +113,14 @@ public class NettyClient {
     }
 
 
+    /**
+     * 开启线程控制命令输入{@link ConsoleCommandManager#consoleCommandMap}
+     */
     private static void startConsoleThread(Channel channel) {
         ConsoleCommandManager consoleCommandManager = new ConsoleCommandManager();
         LoginConsoleCommand loginConsoleCommand = new LoginConsoleCommand();
 
+        //命令模式
         Scanner scanner = new Scanner(System.in);
 
         new Thread(() -> {

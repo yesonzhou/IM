@@ -10,8 +10,9 @@ import lombok.Data;
 
 @Data
 public class AddBuddyAskRequestPacket extends Packet {
+
     private Boolean isAccept;
-    private String otherUid;
+    private String receiverUserName;
 
     @Override
     public Byte getCommand() {
