@@ -7,7 +7,8 @@ public interface SerializerAlgorithm {
     byte JSON = 1;
 
     /**
-     * buffer
+     * buffer protocol
      */
+    byte BP = 2;
 
 }

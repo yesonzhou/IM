@@ -15,6 +15,16 @@ public class MessageBaseTest {
         MessageBase.Message message = MessageBase.Message.newBuilder()
                 .setRequestId(UUID.randomUUID().toString())
                 .setContent("hello world").build();
-        System.out.println("message: "+message.toString());
+
+        for (byte i : message.toByteArray()){
+            System.out.print(i);
+        }
+
+        System.out.println();
+
+        System.out.println(message.toByteArray()[0]);
+        System.out.println(message.toByteArray()[1]);
+
+        System.out.println("message: "+message.getContent());
     }
 }

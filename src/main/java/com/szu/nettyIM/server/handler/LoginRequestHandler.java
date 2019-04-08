@@ -33,6 +33,7 @@ public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginReques
         ctx.channel().writeAndFlush(loginResponsePacket);
     }
 
+    // 判断用户密码是否正确
     private boolean valid(LoginRequestPacket loginRequestPacket) {
         return true;
     }
