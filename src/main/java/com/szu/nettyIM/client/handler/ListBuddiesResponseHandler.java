@@ -14,5 +14,6 @@ public class ListBuddiesResponseHandler extends SimpleChannelInboundHandler<List
         List<Buddy> buddies = listBuddiesResponsePacket.getBuddies();
 
         System.out.println("好友列表为：" + buddies.toString());
+
     }
 }
