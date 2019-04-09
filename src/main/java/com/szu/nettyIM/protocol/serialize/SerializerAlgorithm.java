@@ -9,6 +9,6 @@ public interface SerializerAlgorithm {
     /**
      * buffer protocol
      */
-    byte BP = 2;
+    byte PB = 2;
 
 }

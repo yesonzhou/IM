@@ -10,10 +10,10 @@ import com.szu.nettyIM.protocol.serialize.SerializerAlgorithm;
  * ---------------------------------*、****------------------------------------------
  */
 
-public class BPSerializer implements Serializer {
+public class PBSerializer implements Serializer {
     @Override
     public byte getSerializerAlgorithm() {
-        return SerializerAlgorithm.BP;
+        return SerializerAlgorithm.PB;
     }
 
     @Override
