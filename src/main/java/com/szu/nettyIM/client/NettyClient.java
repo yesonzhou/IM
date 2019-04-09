@@ -92,7 +92,7 @@ public class NettyClient {
             if (future.isSuccess()) {
                 System.out.println(new Date() + ": 连接成功，启动控制台线程……");
                 Channel channel = ((ChannelFuture) future).channel();
-                startConsoleThread(channel);
+                startConsoleThread(channel);    // 安卓端添加用户行为反馈，向server发起请求
             } else if (retry == 0) {
                 System.err.println("重试次数已用完，放弃连接！");
             } else {
@@ -101,8 +101,7 @@ public class NettyClient {
                 // 本次重连的间隔
                 int delay = 1 << order;
                 System.err.println(new Date() + ": 连接失败，第" + order + "次重连……");
-                bootstrap.config().group().schedule(() -> connect(bootstrap, host, port, retry - 1), delay, TimeUnit
-                        .SECONDS);
+                bootstrap.config().group().schedule(() -> connect(bootstrap, host, port, retry - 1), delay, TimeUnit.SECONDS);
             }
         });
     }
