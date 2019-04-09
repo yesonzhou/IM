@@ -42,7 +42,7 @@ public class Test {
 
 
             JSONObject json = new JSONObject();
-            json.put("test_k","v");
+            json.put("key","value");
             Map data = JSONObject.parseObject(json.toString(), Map.class);
             XContentParser xContentParser = XContentFactory.xContent(XContentType.JSON)
                     .createParser(NamedXContentRegistry.EMPTY,json.toString());
@@ -51,7 +51,7 @@ public class Test {
             //在这里创建我们要索引的对象
             IndexResponse response = client.prepareIndex("index", "type")
                     //必须为对象单独指定ID
-                    .setId("test_id2")
+                    .setId("test_id3")
                     .setSource(data) // 新版需要传入Map类型
                     .execute()
                     .actionGet();
