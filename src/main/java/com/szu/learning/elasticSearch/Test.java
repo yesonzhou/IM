@@ -17,7 +17,6 @@ import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 
 import java.net.InetAddress;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
