@@ -16,17 +16,18 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
 /**
  * ---------------------------------*、****------------------------------------------
  */
-
-public class NettyServer {
+@Service("server")
+class Server {
     private static final int PORT = 8000;
 
-    public static void main(String[] args) {
+    public void run() {
         NioEventLoopGroup bossGroup = new NioEventLoopGroup();
         NioEventLoopGroup workerGroup = new NioEventLoopGroup();
 

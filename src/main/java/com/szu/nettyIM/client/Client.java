@@ -21,6 +21,7 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.Scanner;
@@ -29,15 +30,19 @@ import java.util.concurrent.TimeUnit;
 /**
  * ---------------------------------*、****------------------------------------------
  */
-
-public class NettyClient {
+@Service("Client")
+class Client {
     private static final int MAX_RETRY = 5;
     private static final String HOST = "127.0.0.1"; // 127.0.0.1
     private static final int PORT = 8000;
 
     public static void main(String[] args) {
-        NioEventLoopGroup workerGroup = new NioEventLoopGroup();
+        Client client = new Client();
+        client.run();
+    }
 
+    public void run() {
+        NioEventLoopGroup workerGroup = new NioEventLoopGroup();
         Bootstrap bootstrap = new Bootstrap();
         bootstrap
                 // 1.指定线程模型
@@ -82,7 +87,7 @@ public class NettyClient {
         connect(bootstrap, HOST, PORT, MAX_RETRY);
     }
 
-    private static void connect(Bootstrap bootstrap, String host, int port, int retry) {
+    private void connect(Bootstrap bootstrap, String host, int port, int retry) {
         /**
          * 1、连接成功
          * 2、连接失败，重试
@@ -107,7 +112,7 @@ public class NettyClient {
     }
 
 
-    private static void startConsoleThread(Channel channel) {
+    private void startConsoleThread(Channel channel) {
         ConsoleCommandManager consoleCommandManager = new ConsoleCommandManager();
         LoginConsoleCommand loginConsoleCommand = new LoginConsoleCommand();
 
