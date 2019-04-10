@@ -12,7 +12,9 @@ public class LoginConsoleCommand implements ConsoleCommand {
 
         System.out.print("输入用户名登录: ");
         loginRequestPacket.setUserName(scanner.nextLine());
-        loginRequestPacket.setPassword("pwd");
+
+        System.out.print("输入用户名密码: ");
+        loginRequestPacket.setPassword(scanner.nextLine());
 
         // 发送登录数据包
         channel.writeAndFlush(loginRequestPacket);

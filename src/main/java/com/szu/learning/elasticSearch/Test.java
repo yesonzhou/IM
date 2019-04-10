@@ -30,9 +30,13 @@ public class Test {
         try {
 
             //设置集群名称
-//            Settings settings = Settings.builder().put("cluster.name", "elasticsearch").build();
+            Settings settings = Settings.builder()
+                    .put("cluster.name", "elasticsearch")
+                    .put("thread_pool.search.size", 5)
+                    .build();
+
             //创建client
-            TransportClient client = new PreBuiltTransportClient(Settings.EMPTY)
+            TransportClient client = new PreBuiltTransportClient(settings)
                     .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("129.204.75.206"), 9300));
 
             List<DiscoveryNode> test = client.listedNodes();

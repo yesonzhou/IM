@@ -10,6 +10,9 @@ public class RegisterResponsePacket extends Packet {
     private boolean isOk;
     private String message;
 
+    public RegisterResponsePacket(){}
+
+
     public RegisterResponsePacket(boolean isOk, String message) {
         this.isOk = isOk;
         this.message = message;

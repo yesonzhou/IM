@@ -100,6 +100,27 @@ public class ElasticsearchUtils {
     }
 
     /**
+     * 判断索引、类型、id是否存在
+     *
+     * @param index
+     * @return
+     */
+    public static boolean isIDExist(String index,String type,String id) {
+        GetRequestBuilder requestBuilder = client.prepareGet(index, type, id);
+
+        Boolean isExist = requestBuilder.execute().actionGet().isExists();
+
+
+        if (isExist) {
+            LOGGER.info("id [" + id + "] is exist!");
+        } else {
+            LOGGER.info("id [" + id + "] is not exist!");
+        }
+        return isExist;
+    }
+
+
+    /**
      * 数据添加，正定ID
      *
      * @param jsonObject 要增加的数据
@@ -127,6 +148,7 @@ public class ElasticsearchUtils {
      */
     public static String addData(JSONObject jsonObject, String index, String type) {
         return addData(jsonObject, index, type, UUID.randomUUID().toString().replaceAll("-", "").toUpperCase());
+
     }
 
     /**

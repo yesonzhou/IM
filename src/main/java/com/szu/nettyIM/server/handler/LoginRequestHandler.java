@@ -2,6 +2,7 @@ package com.szu.nettyIM.server.handler;
 
 import com.szu.nettyIM.protocol.packet.request.LoginRequestPacket;
 import com.szu.nettyIM.protocol.packet.response.LoginResponsePacket;
+import com.szu.nettyIM.server.db.es.utils.ElasticsearchUtils;
 import com.szu.nettyIM.session.Session;
 import com.szu.nettyIM.util.IDUtil;
 import com.szu.nettyIM.util.SessionUtil;
@@ -10,6 +11,9 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import java.util.Date;
 
 public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginRequestPacket> {
+    static final String index = "user";
+    static final String type = "register";
+    static final String password = "password";
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LoginRequestPacket loginRequestPacket) {
@@ -35,7 +39,10 @@ public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginReques
 
     // 判断用户密码是否正确
     private boolean valid(LoginRequestPacket loginRequestPacket) {
-        return true;
+        String truePassword = (String) ElasticsearchUtils.searchDataById(index,type,loginRequestPacket.getUserName(),password)
+        .get(password);
+
+        return truePassword.equals(loginRequestPacket.getPassword());
     }
 
     @Override
