@@ -3,6 +3,7 @@ package com.szu.nettyIM.server.handler;
 import com.szu.nettyIM.protocol.packet.request.LoginRequestPacket;
 import com.szu.nettyIM.protocol.packet.response.LoginResponsePacket;
 import com.szu.nettyIM.server.db.es.utils.ElasticsearchUtils;
+import com.szu.nettyIM.server.handler.constant.Constant;
 import com.szu.nettyIM.session.Session;
 import com.szu.nettyIM.util.IDUtil;
 import com.szu.nettyIM.util.SessionUtil;

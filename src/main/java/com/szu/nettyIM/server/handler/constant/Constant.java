@@ -1,4 +1,4 @@
-package com.szu.nettyIM.server.handler;/**
+package com.szu.nettyIM.server.handler.constant;/**
  * The demo is created by yesonzhou on 2019/4/10 15:16
  * Note: ***
  */

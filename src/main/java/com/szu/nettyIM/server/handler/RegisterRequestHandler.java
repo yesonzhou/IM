@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.szu.nettyIM.protocol.packet.request.RegisterRequestPacket;
 import com.szu.nettyIM.protocol.packet.response.RegisterResponsePacket;
 import com.szu.nettyIM.server.db.es.utils.ElasticsearchUtils;
+import com.szu.nettyIM.server.handler.constant.Constant;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
