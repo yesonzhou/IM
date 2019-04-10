@@ -9,8 +9,10 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class SessionUtil {
+    // 用于双方通信
     private static final Map<String, Channel> userNameChannelMap = new ConcurrentHashMap<>();
 
+    // 用于群聊
     private static final Map<String, ChannelGroup> groupIdChannelGroupMap = new ConcurrentHashMap<>();
 
     public static void bindSession(Session session, Channel channel) {

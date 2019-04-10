@@ -8,12 +8,13 @@ import com.szu.nettyIM.util.IDUtil;
 import com.szu.nettyIM.util.SessionUtil;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Date;
 
 public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginRequestPacket> {
-    static final String index = "user";
-    static final String type = "register";
-    static final String password = "password";
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LoginRequestPacket loginRequestPacket) {
@@ -39,8 +40,11 @@ public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginReques
 
     // 判断用户密码是否正确
     private boolean valid(LoginRequestPacket loginRequestPacket) {
-        String truePassword = (String) ElasticsearchUtils.searchDataById(index,type,loginRequestPacket.getUserName(),password)
-        .get(password);
+        String truePassword = (String) ElasticsearchUtils.searchDataById(Constant.INDEX_User
+                ,Constant.TYPE_REGISTER
+                ,loginRequestPacket.getUserName()
+                ,Constant.FIELD_PASSWORD)
+        .get(Constant.FIELD_PASSWORD);
 
         return truePassword.equals(loginRequestPacket.getPassword());
     }
