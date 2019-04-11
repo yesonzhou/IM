@@ -7,9 +7,13 @@ import com.szu.nettyIM.util.SessionUtil;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class MessageRequestHandler extends SimpleChannelInboundHandler<MessageRequestPacket> {
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, MessageRequestPacket messageRequestPacket) {
         // 1.拿到消息发送方的会话信息
@@ -19,8 +23,6 @@ public class MessageRequestHandler extends SimpleChannelInboundHandler<MessageRe
         MessageResponsePacket messageResponsePacket = new MessageResponsePacket();
         messageResponsePacket.setFromUserName(session.getUserName());
         messageResponsePacket.setMessage(messageRequestPacket.getMessage());
-
-        //todo:需要重新实现
 
         // 3.拿到消息接收方的 channel
         Channel toUserChannel = SessionUtil.getChannel(messageRequestPacket.getToUserName());
