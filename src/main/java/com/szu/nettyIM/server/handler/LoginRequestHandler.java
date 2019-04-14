@@ -35,6 +35,8 @@ public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginReques
             System.out.println(new Date() + ": 登录失败!");
         }
 
+        // todo 返回用户登录基本信息
+
         // 登录响应
         ctx.channel().writeAndFlush(loginResponsePacket);
     }

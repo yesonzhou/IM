@@ -14,9 +14,12 @@ public class AddBuddyConsoleCommand implements ConsoleCommand {
     public void exec(Scanner scanner, Channel channel) {
         System.out.println("【添加好友】输入 userId ：");
         String buddyId = scanner.next();
+        System.out.println("【添加好友】输入备注 ：");
+        String message = scanner.next();
 
         AddBuddyRequestPacket addBuddyRequestPacket = new AddBuddyRequestPacket();
-        addBuddyRequestPacket.setBuddyId(buddyId);
+        addBuddyRequestPacket.setUserName(buddyId);
+        addBuddyRequestPacket.setMessage(message);
         channel.writeAndFlush(addBuddyRequestPacket);
     }
 }

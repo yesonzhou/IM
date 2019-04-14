@@ -10,8 +10,11 @@ import lombok.Data;
 
 @Data
 public class AddBuddyAskResponsePacket extends Packet {
-    Boolean isAccept;
-    String message;
+    private Boolean isAccept;
+    private String accepterName;
+    private String senderName;
+    private String message;
+    private String error;
 
     @Override
     public Byte getCommand() {

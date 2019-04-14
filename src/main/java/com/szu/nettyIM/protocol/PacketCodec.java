@@ -1,6 +1,6 @@
 package com.szu.nettyIM.protocol;
 
-import com.sun.istack.internal.Nullable;
+//import com.sun.istack.internal.Nullable;
 import com.szu.nettyIM.protocol.packet.Packet;
 import com.szu.nettyIM.protocol.packet.request.*;
 import com.szu.nettyIM.protocol.packet.response.*;
@@ -98,7 +98,7 @@ public class PacketCodec {
         return serializerMap.get(serializeAlgorithm);
     }
 
-    @Nullable
+//    @Nullable
     private Class<? extends Packet> getRequestType(byte command) {
         return packetTypeMap.get(command);
     }

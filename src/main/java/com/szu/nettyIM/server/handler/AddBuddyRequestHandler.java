@@ -5,7 +5,6 @@ import com.szu.nettyIM.protocol.packet.response.AddBuddyAskResponsePacket;
 import com.szu.nettyIM.protocol.packet.response.AddBuddyResponsePacket;
 import com.szu.nettyIM.server.db.es.utils.ElasticsearchUtils;
 import com.szu.nettyIM.server.handler.constant.Constant;
-import com.szu.nettyIM.session.Session;
 import com.szu.nettyIM.util.SessionUtil;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
@@ -19,31 +18,31 @@ public class AddBuddyRequestHandler extends SimpleChannelInboundHandler<AddBuddy
 
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, AddBuddyRequestPacket addBuddyRequestPacket) throws Exception {
-        String uid = addBuddyRequestPacket.getBuddyId();
+        String sender = addBuddyRequestPacket.getUserName();
+        String accepter = addBuddyRequestPacket.getBuddyUserName();
+        String message = addBuddyRequestPacket.getMessage();
 
         AddBuddyResponsePacket addBuddyResponsePacket = new AddBuddyResponsePacket();
 
         // 查询数据库，判断是否有效用户
-        Boolean isExist = ElasticsearchUtils.isIDExist(Constant.INDEX_User,Constant.TYPE_REGISTER,uid);
+        Boolean isExist = ElasticsearchUtils.isIDExist(Constant.INDEX_User
+                ,Constant.TYPE_REGISTER,accepter);
         if (isExist){
-            addBuddyResponsePacket.setIsOk(true);
-
-            // todo 发送给登录用户
-            Channel buddyChannel = SessionUtil.getChannel(addBuddyRequestPacket.getBuddyId());
+            addBuddyResponsePacket.setSenderName(sender);
+            addBuddyResponsePacket.setMessage(message);
+            Channel buddyChannel = SessionUtil.getChannel(accepter);
             if (SessionUtil.hasLogin(buddyChannel)){
-
+                buddyChannel.writeAndFlush(addBuddyRequestPacket);
             }
 
-
-
-
+            // todo 发送给未登录登录用户
             addBuddyResponsePacket.setMessage("发送完成");
         } else {
-            System.err.println(uid + "用户不存在");
+            AddBuddyAskResponsePacket abar = new AddBuddyAskResponsePacket();
+            abar.setError("用户不存在");
+            System.err.println(accepter + "用户不存在");
         }
 
-//        channelHandlerContext.channel().writeAndFlush(addBuddyResponsePacket);
-
-
+        channelHandlerContext.channel().writeAndFlush(addBuddyResponsePacket);
     }
 }

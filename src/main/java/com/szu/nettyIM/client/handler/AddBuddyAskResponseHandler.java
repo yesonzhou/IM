@@ -11,6 +11,8 @@ import io.netty.channel.SimpleChannelInboundHandler;
 public class AddBuddyAskResponseHandler extends SimpleChannelInboundHandler<AddBuddyAskResponsePacket> {
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, AddBuddyAskResponsePacket addBuddyAskResponsePacket) throws Exception {
+        // 用户添加成功
 
+        // 用户添加失败
     }
 }

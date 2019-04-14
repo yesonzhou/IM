@@ -11,7 +11,9 @@ import lombok.Data;
 @Data
 public class AddBuddyAskRequestPacket extends Packet {
     private Boolean isAccept;
-    private String otherUid;
+    private String accepterName;
+    private String senderName;
+    private String message;
 
     @Override
     public Byte getCommand() {

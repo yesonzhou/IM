@@ -38,8 +38,8 @@ public class SessionUtil {
         return channel.attr(Attributes.SESSION).get();
     }
 
-    public static Channel getChannel(String userId) {
-        return userNameChannelMap.get(userId);
+    public static Channel getChannel(String userName) {
+        return userNameChannelMap.get(userName);
     }
 
     public static void bindChannelGroup(String groupId, ChannelGroup channelGroup) {

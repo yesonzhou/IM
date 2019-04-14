@@ -10,7 +10,9 @@ import lombok.Data;
 
 @Data
 public class AddBuddyRequestPacket extends Packet {
-    String buddyId;
+    String userName;
+    String buddyUserName;
+    String message;
 
     @Override
     public Byte getCommand() {

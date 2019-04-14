@@ -1,6 +1,5 @@
 package com.szu.nettyIM.protocol.command;
 
-import com.sun.beans.editors.ByteEditor;
 
 public interface Command {
 
@@ -56,5 +55,12 @@ public interface Command {
 
     Byte HEARTBEAT_RESPONSE = 26;
 
+    Byte MESSAGE_ERROR_RESPONSE = 27;
+
+    Byte GROUP_MESSAGE_REQUEST = 28;
+
+    Byte GROUP_MESSAGE_RESPONSE = 29;
+
+    Byte GROUP_MESSAGE_ERROR_RESPONSE = 30;
 
 }
