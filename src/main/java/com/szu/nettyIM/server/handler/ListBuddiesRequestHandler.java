@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 
 public class ListBuddiesRequestHandler extends SimpleChannelInboundHandler<ListBuddiesRequestPacket> {
@@ -23,12 +24,12 @@ public class ListBuddiesRequestHandler extends SimpleChannelInboundHandler<ListB
         String uid = listBuddiesRequestPacket.getUserName();
 
         // 查询uid的好友列表
-        String strBuddies = (String)ElasticsearchUtils.searchDataById(Constant.INDEX_User,Constant.TYPE_BUDDIES,uid,Constant.FIELD_USERNAME)
-                .get(Constant.FIELD_USERNAME);
+        Map<String,Object> strBuddies = ElasticsearchUtils.searchDataById(Constant.INDEX_User,Constant.TYPE_BUDDIES,uid,Constant.FIELD_USERNAME);
+
 
         // 装包
         List<Buddy> buddies = new ArrayList<>();
-        for (String buddy : Collections.singletonList(strBuddies)){
+        for (String buddy : strBuddies.keySet()){
             buddies.add(new Buddy(buddy));
         }
         ListBuddiesResponsePacket lbrp = new ListBuddiesResponsePacket(buddies);
