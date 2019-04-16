@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Buddy {
     private String name;
+    private Class clazz = this.getClass();
 
     public Buddy(String name) {
         this.name = name;
