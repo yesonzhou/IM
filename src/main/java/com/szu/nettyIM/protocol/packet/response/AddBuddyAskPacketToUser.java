@@ -9,10 +9,10 @@ import lombok.Data;
  */
 
 @Data
-public class AddBuddyAskResponsePacket extends Packet {
+public class AddBuddyAskPacketToUser extends Packet {
     private Boolean isAccept;
-    private String accepterName;
-    private String senderName;
+    private String userNameAsk;
+    private String userNameWaitAsk;
     private String message;
     private String error;
 

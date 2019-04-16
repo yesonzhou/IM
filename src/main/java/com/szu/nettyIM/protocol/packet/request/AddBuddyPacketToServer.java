@@ -9,7 +9,7 @@ import lombok.Data;
  */
 
 @Data
-public class AddBuddyRequestPacket extends Packet {
+public class AddBuddyPacketToServer extends Packet {
     String userName;
     String buddyUserName;
     String message;

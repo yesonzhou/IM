@@ -10,7 +10,7 @@ import lombok.Data;
 
 // to accepter
 @Data
-public class AddBuddyResponsePacket extends Packet {
+public class AddBuddyPacketToUser extends Packet {
     String senderName;
     String acceptName;
     String message;
