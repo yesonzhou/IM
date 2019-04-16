@@ -26,10 +26,10 @@ public class ListBuddiesRequestHandler extends SimpleChannelInboundHandler<ListB
         // 查询uid的好友列表
         Map<String,Object> strBuddies = ElasticsearchUtils.searchDataById(Constant.INDEX_User,Constant.TYPE_BUDDIES,uid,Constant.FIELD_USERNAME);
 
-
         // 装包
         List<Buddy> buddies = new ArrayList<>();
         for (String buddy : strBuddies.keySet()){
+
             buddies.add(new Buddy(buddy));
         }
         ListBuddiesResponsePacket lbrp = new ListBuddiesResponsePacket(buddies);
