@@ -41,10 +41,10 @@ public class PacketCodec {
         packetTypeMap.put(JOIN_GROUP_RESPONSE, JoinGroupResponsePacket.class);
         packetTypeMap.put(QUIT_GROUP_REQUEST, QuitGroupRequestPacket.class);
         packetTypeMap.put(QUIT_GROUP_RESPONSE, QuitGroupResponsePacket.class);
-        packetTypeMap.put(ADD_BUDDY_REQUEST, AddBuddyPacketToServer.class);
-        packetTypeMap.put(ADD_BUDDY_RESPONSE, AddBuddyPacketToUser.class);
-        packetTypeMap.put(ADD_BUDDY_ASK_REQUEST, AddBuddyAskPacketToServer.class);
-        packetTypeMap.put(ADD_BUDDY_ASK_RESPONSE, AddBuddyAskPacketToUser.class);
+        packetTypeMap.put(ADD_BUDDY_TO_SERVER, AddBuddyPacketToServer.class);
+        packetTypeMap.put(ADD_BUDDY_TO_USER, AddBuddyPacketToUser.class);
+        packetTypeMap.put(ADD_BUDDY_ASK_TO_SERVER, AddBuddyAskPacketToServer.class);
+        packetTypeMap.put(ADD_BUDDY_ASK_TO_USER, AddBuddyAskPacketToUser.class);
         //MODIFY_ACCOUNT_REQUEST
         //MODIFY_ACCOUNT_RESPONSE
         packetTypeMap.put(HEARTBEAT_REQUEST, HeartBeatRequestPacket.class);

@@ -18,6 +18,6 @@ public class AddBuddyAskPacketToServer extends Packet {
 
     @Override
     public Byte getCommand() {
-        return Command.ADD_BUDDY_ASK_REQUEST;
+        return Command.ADD_BUDDY_ASK_TO_SERVER;
     }
 }

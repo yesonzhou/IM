@@ -31,21 +31,19 @@ public interface Command {
 
     Byte QUIT_GROUP_RESPONSE = 14;
 
-    Byte ADD_BUDDY_REQUEST = 15;
+    Byte ADD_BUDDY_TO_SERVER = 15;
 
-    Byte ADD_BUDDY_RESPONSE = 16;
+    Byte ADD_BUDDY_TO_USER = 16;
 
-    Byte ADD_BUDDY_ASK_REQUEST = 17;
+    Byte ADD_BUDDY_ASK_TO_SERVER = 17;
 
-    Byte ADD_BUDDY_ASK_RESPONSE = 18;
+    Byte ADD_BUDDY_ASK_TO_USER = 18;
 
     Byte MODIFY_ACCOUNT_REQUEST = 19;
 
     Byte MODIFY_ACCOUNT_RESPONSE = 20;
 
     Byte HEARTBEAT_REQUEST = 21;
-
-    Byte HEARTBEAT_RESPONSE = 26;
 
     Byte LIST_BUDDIES_REQUEST = 22;
 
@@ -54,6 +52,8 @@ public interface Command {
     Byte REGISTER_REQUEST = 24;
 
     Byte REGISTER_RESPONSE = 25;
+
+    Byte HEARTBEAT_RESPONSE = 26;
 
     Byte MESSAGE_ERROR_RESPONSE = 27;
 

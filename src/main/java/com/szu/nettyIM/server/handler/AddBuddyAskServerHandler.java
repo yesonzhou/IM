@@ -25,26 +25,27 @@ public class AddBuddyAskServerHandler extends
         String userNameWaitAsk = addBuddyAskPacketToServer.getUserNameWaitAsk();
         String userNameAsk = addBuddyAskPacketToServer.getUserNameAsk();
 
-        AddBuddyAskPacketToUser addBuddyAskPacketToUser = new AddBuddyAskPacketToUser();
-        addBuddyAskPacketToUser.setIsAccept(isAccept);
-        addBuddyAskPacketToUser.setMessage(addBuddyAskPacketToServer.getMessage());
-        addBuddyAskPacketToUser.setUserNameAsk(userNameAsk);
-        addBuddyAskPacketToUser.setUserNameWaitAsk(userNameWaitAsk);
-
-        System.out.println("接收到返回数据");
-
         if (isAccept) {
-            System.out.println("添加好友");
             addBuddies(userNameWaitAsk, userNameAsk);
             addBuddies(userNameAsk, userNameWaitAsk);
         } else {
             System.out.println("拒绝添加好友");
         }
 
-        //转发包给等待回应的用户
-        Channel targetChannel = SessionUtil.getChannel(userNameAsk);
+        Channel targetChannel = SessionUtil.getChannel(userNameWaitAsk);
         if (SessionUtil.hasLogin(targetChannel)) {
+            //转发包给等待回应的用户
+            AddBuddyAskPacketToUser addBuddyAskPacketToUser = new AddBuddyAskPacketToUser();
+            addBuddyAskPacketToUser.setIsAccept(isAccept);
+            addBuddyAskPacketToUser.setMessage(addBuddyAskPacketToServer.getMessage());
+            addBuddyAskPacketToUser.setUserNameAsk(userNameAsk);
+            addBuddyAskPacketToUser.setUserNameWaitAsk(userNameWaitAsk);
             targetChannel.writeAndFlush(addBuddyAskPacketToUser);
+
+            //重要：交换参数回发给该包的发起者以更新数据
+            addBuddyAskPacketToUser.setUserNameAsk(userNameWaitAsk);
+            addBuddyAskPacketToUser.setUserNameWaitAsk(userNameAsk);
+            channelHandlerContext.channel().writeAndFlush(addBuddyAskPacketToUser);
         } else {
             //todo 发给不在线的用户
             System.out.println("用户不在线");

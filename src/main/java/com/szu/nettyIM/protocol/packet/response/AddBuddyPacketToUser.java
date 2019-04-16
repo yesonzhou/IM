@@ -17,6 +17,6 @@ public class AddBuddyPacketToUser extends Packet {
 
     @Override
     public Byte getCommand() {
-        return Command.ADD_BUDDY_RESPONSE;
+        return Command.ADD_BUDDY_TO_USER;
     }
 }
