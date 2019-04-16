@@ -27,10 +27,10 @@ public class ListBuddiesRequestHandler extends SimpleChannelInboundHandler<ListB
         Map<String,Object> strBuddies = ElasticsearchUtils.searchDataById(
                 Constant.INDEX_User,Constant.TYPE_BUDDIES,uid,null);
 
-
         // 装包
         List<Buddy> buddies = new ArrayList<>();
         for (String buddy : strBuddies.keySet()){
+
             buddies.add(new Buddy(buddy));
         }
         ListBuddiesResponsePacket lbrp = new ListBuddiesResponsePacket(buddies);
