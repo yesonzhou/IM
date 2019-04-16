@@ -1,6 +1,6 @@
 package com.szu.nettyIM.client.console;
 
-import com.szu.nettyIM.protocol.packet.request.AddBuddyAskRequestPacket;
+import com.szu.nettyIM.protocol.packet.request.AddBuddyAskPacketToServer;
 import io.netty.channel.Channel;
 
 import java.util.Scanner;
@@ -14,9 +14,9 @@ public class AddBuddyAskConsole implements ConsoleCommand {
     public void exec(Scanner scanner, Channel channel) {
         System.out.println("是否添加为好友：");
         boolean isAccept = scanner.nextBoolean();
-        AddBuddyAskRequestPacket addBuddyAskRequestPacket = new AddBuddyAskRequestPacket();
-        addBuddyAskRequestPacket.setIsAccept(isAccept);
+        AddBuddyAskPacketToServer addBuddyAskPacketToServer = new AddBuddyAskPacketToServer();
+        addBuddyAskPacketToServer.setIsAccept(isAccept);
 
-        channel.writeAndFlush(addBuddyAskRequestPacket);
+        channel.writeAndFlush(addBuddyAskPacketToServer);
     }
 }

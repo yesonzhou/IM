@@ -22,7 +22,7 @@ public interface Constant {
     /**
      * field
      */
-    String FIELD_USERNAME = "userName";
+    String FIELD_USERNAME = "userNameHoldKey";
     String FIELD_PASSWORD = "password";
 
 

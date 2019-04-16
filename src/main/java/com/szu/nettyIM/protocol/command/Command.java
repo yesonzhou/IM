@@ -45,6 +45,8 @@ public interface Command {
 
     Byte HEARTBEAT_REQUEST = 21;
 
+    Byte HEARTBEAT_RESPONSE = 26;
+
     Byte LIST_BUDDIES_REQUEST = 22;
 
     Byte LIST_BUDDIES_RESPONSE = 23;
@@ -53,8 +55,6 @@ public interface Command {
 
     Byte REGISTER_RESPONSE = 25;
 
-    Byte HEARTBEAT_RESPONSE = 26;
-
     Byte MESSAGE_ERROR_RESPONSE = 27;
 
     Byte GROUP_MESSAGE_REQUEST = 28;
@@ -62,5 +62,17 @@ public interface Command {
     Byte GROUP_MESSAGE_RESPONSE = 29;
 
     Byte GROUP_MESSAGE_ERROR_RESPONSE = 30;
+
+    Byte GET_USER_KEY_REQUEST = 31;
+
+    Byte GET_USER_KEY_RESPONSE = 32;
+
+    Byte SET_USER_KEY_REQUEST = 33;
+
+    Byte SET_USER_KEY_RESPONSE = 34;
+
+    Byte GET_SERVER_KEY_REQUEST = 35;
+
+    Byte GET_SERVER_KEY_RESPONSE = 36;
 
 }
