@@ -6,9 +6,13 @@ package com.szu.nettyIM.server;/**
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONPObject;
 import com.szu.nettyIM.server.db.es.utils.ElasticsearchUtils;
+import com.szu.nettyIM.server.handler.constant.Constant;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+
+import java.util.Map;
 
 /**
  * ---------------------------------*、****------------------------------------------
@@ -25,14 +29,6 @@ public class ServerApp {
         ApplicationContext context = SpringApplication.run(ServerApp.class, args);
         Server nettyServer = context.getBean(Server.class);
         nettyServer.run();
-
-//        JSONObject json = new JSONObject();
-//        json.put("password","123456");
-//        for (int i : new int[]{1,2,3,4,5})
-//        ElasticsearchUtils.addData(json,"user","register","test" + i);
-
-
-
 
     }
 
