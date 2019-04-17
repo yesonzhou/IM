@@ -1,6 +1,5 @@
 package com.szu.nettyIM.server.handler;
 
-
 import com.alibaba.fastjson.JSONObject;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.szu.nettyIM.protocol.packet.request.AddBuddyAskRequestPacket;
@@ -26,7 +25,6 @@ public class AddBuddyAskRequestHandler extends SimpleChannelInboundHandler<AddBu
         String sender = addBuddyAskRequestPacket.getSenderName();
         String accepter = addBuddyAskRequestPacket.getAccepterName();
 
-
         addBuddyAskResponsePacket.setIsAccept(isAccept);
         addBuddyAskResponsePacket.setMessage(addBuddyAskRequestPacket.getMessage());
         addBuddyAskResponsePacket.setAccepterName(addBuddyAskRequestPacket.getAccepterName());
@@ -42,7 +40,6 @@ public class AddBuddyAskRequestHandler extends SimpleChannelInboundHandler<AddBu
 
     }
 
-
     private void addBuddies(String userName,String addUser){
         JSONObject json = new JSONObject();
         json.put(addUser,"基本数据");
@@ -51,4 +48,5 @@ public class AddBuddyAskRequestHandler extends SimpleChannelInboundHandler<AddBu
         ,userName);
 
     }
+
 }
