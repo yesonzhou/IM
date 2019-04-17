@@ -1,7 +1,7 @@
 package com.szu.nettyIM.client.handler;
 
-import com.szu.nettyIM.protocol.packet.request.AddBuddyAskRequestPacket;
-import com.szu.nettyIM.protocol.packet.response.AddBuddyResponsePacket;
+import com.szu.nettyIM.protocol.packet.request.AddBuddyAskPacketToServer;
+import com.szu.nettyIM.protocol.packet.response.AddBuddyPacketToUser;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
@@ -11,12 +11,12 @@ import java.util.Scanner;
  * Created by y_s on 2019/4/11 7:52 PM
  */
 
-public class AddBuddyResponseHandler extends SimpleChannelInboundHandler<AddBuddyResponsePacket> {
+public class AddBuddyResponseHandler extends SimpleChannelInboundHandler<AddBuddyPacketToUser> {
     @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, AddBuddyResponsePacket addBuddyResponsePacket) throws Exception {
-        String fromUserName = addBuddyResponsePacket.getSenderName();
-        String accepter = addBuddyResponsePacket.getAcceptName();
-        String message = addBuddyResponsePacket.getMessage();
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, AddBuddyPacketToUser addBuddyPacketToUser) throws Exception {
+        String fromUserName = addBuddyPacketToUser.getSenderName();
+        String accepter = addBuddyPacketToUser.getAcceptName();
+        String message = addBuddyPacketToUser.getMessage();
 
 
         Scanner scanner = new Scanner(System.in);
@@ -27,18 +27,18 @@ public class AddBuddyResponseHandler extends SimpleChannelInboundHandler<AddBudd
         System.out.println("发送内容 ： ");
         String responseMess = scanner.next();
 
-        AddBuddyAskRequestPacket addBuddyAskRequestPacket = new AddBuddyAskRequestPacket();
-        addBuddyAskRequestPacket.setSenderName(fromUserName);
-        addBuddyAskRequestPacket.setAccepterName(accepter);
-        addBuddyAskRequestPacket.setMessage(responseMess);
+        AddBuddyAskPacketToServer addBuddyAskPacketToServer = new AddBuddyAskPacketToServer();
+        addBuddyAskPacketToServer.setUserNameWaitAsk(fromUserName);
+        addBuddyAskPacketToServer.setUserNameAsk(accepter);
+        addBuddyAskPacketToServer.setMessage(responseMess);
 
         if ("1".equals(scanner.next().trim())){
             // 同意添加好友
-            addBuddyAskRequestPacket.setIsAccept(true);
+            addBuddyAskPacketToServer.setIsAccept(true);
         } else {
-            addBuddyAskRequestPacket.setIsAccept(false);
+            addBuddyAskPacketToServer.setIsAccept(false);
         }
 
-        channelHandlerContext.channel().writeAndFlush(addBuddyAskRequestPacket);
+        channelHandlerContext.channel().writeAndFlush(addBuddyAskPacketToServer);
     }
 }

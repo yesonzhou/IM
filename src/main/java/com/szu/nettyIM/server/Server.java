@@ -40,12 +40,15 @@ class Server {
                 .childOption(ChannelOption.TCP_NODELAY, true)
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     protected void initChannel(NioSocketChannel ch) {
-//                        ch.pipeline().addLast(new IMIdleStateHandler());
+                        ch.pipeline().addLast(new IMIdleStateHandler());
                         ch.pipeline().addLast(new Spliter());
                         ch.pipeline().addLast(new PacketDecoder());
                         // 登录请求处理器
-//                        ch.pipeline().addLast(HeartBeatRequestHandler.INSTANCE);
+                        ch.pipeline().addLast(new RegisterRequestHandler());
                         ch.pipeline().addLast(new LoginRequestHandler());
+                        ch.pipeline().addLast(new AddBuddyToServerHandler());
+                        ch.pipeline().addLast(new AddBuddyAskServerHandler());
+                        ch.pipeline().addLast(new HeartBeatRequestHandler());
                         ch.pipeline().addLast(new AuthHandler());
                         ch.pipeline().addLast(new ListBuddiesRequestHandler());
                         // 单聊消息请求处理器

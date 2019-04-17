@@ -9,13 +9,13 @@ import lombok.Data;
  */
 
 @Data
-public class AddBuddyRequestPacket extends Packet {
+public class AddBuddyPacketToServer extends Packet {
     String userName;
     String buddyUserName;
     String message;
 
     @Override
     public Byte getCommand() {
-        return Command.ADD_BUDDY_REQUEST;
+        return Command.ADD_BUDDY_TO_SERVER;
     }
 }
