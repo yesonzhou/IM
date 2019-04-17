@@ -9,15 +9,15 @@ import lombok.Data;
  */
 
 @Data
-public class AddBuddyAskResponsePacket extends Packet {
+public class AddBuddyAskPacketToUser extends Packet {
     private Boolean isAccept;
-    private String accepterName;
-    private String senderName;
+    private String userNameAsk;
+    private String userNameWaitAsk;
     private String message;
     private String error;
 
     @Override
     public Byte getCommand() {
-        return Command.ADD_BUDDY_ASK_RESPONSE;
+        return Command.ADD_BUDDY_ASK_TO_USER;
     }
 }

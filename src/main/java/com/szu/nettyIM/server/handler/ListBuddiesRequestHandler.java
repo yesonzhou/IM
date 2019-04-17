@@ -1,6 +1,7 @@
 package com.szu.nettyIM.server.handler;
 
 import com.szu.nettyIM.bean.Buddy;
+import com.szu.nettyIM.bean.User;
 import com.szu.nettyIM.protocol.packet.request.ListBuddiesRequestPacket;
 import com.szu.nettyIM.protocol.packet.response.ListBuddiesResponsePacket;
 import com.szu.nettyIM.server.db.es.utils.ElasticsearchUtils;
@@ -24,15 +25,15 @@ public class ListBuddiesRequestHandler extends SimpleChannelInboundHandler<ListB
         String uid = listBuddiesRequestPacket.getUserName();
 
         // 查询uid的好友列表
-        Map<String,Object> strBuddies = ElasticsearchUtils.searchDataById(Constant.INDEX_User,Constant.TYPE_BUDDIES,uid,Constant.FIELD_USERNAME);
+        Map<String,Object> strBuddies = ElasticsearchUtils
+                .searchDataById(Constant.INDEX_User, Constant.TYPE_BUDDIES,
+                        uid, null);
 
         // 装包
-        List<Buddy> buddies = new ArrayList<>();
+        ListBuddiesResponsePacket lbrp = new ListBuddiesResponsePacket();
         for (String buddy : strBuddies.keySet()){
-
-            buddies.add(new Buddy(buddy));
+            lbrp.addBuddy(new User(buddy));
         }
-        ListBuddiesResponsePacket lbrp = new ListBuddiesResponsePacket(buddies);
 
         ctx.channel().writeAndFlush(lbrp);
     }

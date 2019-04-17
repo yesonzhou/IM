@@ -1,6 +1,7 @@
 package com.szu.nettyIM.protocol;
 
 //import com.sun.istack.internal.Nullable;
+
 import com.szu.nettyIM.protocol.packet.Packet;
 import com.szu.nettyIM.protocol.packet.request.*;
 import com.szu.nettyIM.protocol.packet.response.*;
@@ -34,16 +35,34 @@ public class PacketCodec {
         packetTypeMap.put(LOGOUT_RESPONSE, LogoutResponsePacket.class);
         packetTypeMap.put(CREATE_GROUP_REQUEST, CreateGroupRequestPacket.class);
         packetTypeMap.put(CREATE_GROUP_RESPONSE, CreateGroupResponsePacket.class);
+        packetTypeMap.put(LIST_GROUP_MEMBERS_REQUEST, ListGroupMembersRequestPacket.class);
+        packetTypeMap.put(LIST_GROUP_MEMBERS_RESPONSE, ListGroupMembersResponsePacket.class);
         packetTypeMap.put(JOIN_GROUP_REQUEST, JoinGroupRequestPacket.class);
         packetTypeMap.put(JOIN_GROUP_RESPONSE, JoinGroupResponsePacket.class);
         packetTypeMap.put(QUIT_GROUP_REQUEST, QuitGroupRequestPacket.class);
         packetTypeMap.put(QUIT_GROUP_RESPONSE, QuitGroupResponsePacket.class);
-        packetTypeMap.put(LIST_GROUP_MEMBERS_REQUEST, ListGroupMembersRequestPacket.class);
-        packetTypeMap.put(LIST_GROUP_MEMBERS_RESPONSE, ListGroupMembersResponsePacket.class);
+        packetTypeMap.put(ADD_BUDDY_TO_SERVER, AddBuddyPacketToServer.class);
+        packetTypeMap.put(ADD_BUDDY_TO_USER, AddBuddyPacketToUser.class);
+        packetTypeMap.put(ADD_BUDDY_ASK_TO_SERVER, AddBuddyAskPacketToServer.class);
+        packetTypeMap.put(ADD_BUDDY_ASK_TO_USER, AddBuddyAskPacketToUser.class);
+        //MODIFY_ACCOUNT_REQUEST
+        //MODIFY_ACCOUNT_RESPONSE
+        packetTypeMap.put(HEARTBEAT_REQUEST, HeartBeatRequestPacket.class);
+        packetTypeMap.put(HEARTBEAT_RESPONSE, HeartBeatResponsePacket.class);
         packetTypeMap.put(LIST_BUDDIES_REQUEST, ListBuddiesRequestPacket.class);
         packetTypeMap.put(LIST_BUDDIES_RESPONSE, ListBuddiesResponsePacket.class);
         packetTypeMap.put(REGISTER_REQUEST, RegisterRequestPacket.class);
         packetTypeMap.put(REGISTER_RESPONSE, RegisterResponsePacket.class);
+        //MESSAGE_ERROR_RESPONSE
+        //GROUP_MESSAGE_REQUEST
+        //GROUP_MESSAGE_RESPONSE
+        //GROUP_MESSAGE_ERROR_RESPONSE
+        packetTypeMap.put(GET_USER_KEY_REQUEST, GetUserKeyRequestPacket.class);
+        packetTypeMap.put(GET_USER_KEY_RESPONSE, GetUserKeyResponsePacket.class);
+        packetTypeMap.put(SET_USER_KEY_REQUEST, SetUserKeyRequestPacket.class);
+        packetTypeMap.put(SET_USER_KEY_RESPONSE, SetUserKeyResponsePacket.class);
+        packetTypeMap.put(GET_SERVER_KEY_REQUEST, GetServerKeyRequestPacket.class);
+        packetTypeMap.put(GET_SERVER_KEY_RESPONSE, GetServerKeyResponsePacket.class);
 
         serializerMap = new HashMap<>();
         Serializer serializer = new JSONSerializer();
@@ -98,7 +117,7 @@ public class PacketCodec {
         return serializerMap.get(serializeAlgorithm);
     }
 
-//    @Nullable
+    //    @Nullable
     private Class<? extends Packet> getRequestType(byte command) {
         return packetTypeMap.get(command);
     }

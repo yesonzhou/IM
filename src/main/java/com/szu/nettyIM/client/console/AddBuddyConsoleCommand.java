@@ -1,6 +1,6 @@
 package com.szu.nettyIM.client.console;
 
-import com.szu.nettyIM.protocol.packet.request.AddBuddyRequestPacket;
+import com.szu.nettyIM.protocol.packet.request.AddBuddyPacketToServer;
 import io.netty.channel.Channel;
 
 import java.util.Scanner;
@@ -17,9 +17,9 @@ public class AddBuddyConsoleCommand implements ConsoleCommand {
         System.out.println("【添加好友】输入备注 ：");
         String message = scanner.next();
 
-        AddBuddyRequestPacket addBuddyRequestPacket = new AddBuddyRequestPacket();
-        addBuddyRequestPacket.setUserName(buddyId);
-        addBuddyRequestPacket.setMessage(message);
-        channel.writeAndFlush(addBuddyRequestPacket);
+        AddBuddyPacketToServer addBuddyPacketToServer = new AddBuddyPacketToServer();
+        addBuddyPacketToServer.setUserName(buddyId);
+        addBuddyPacketToServer.setMessage(message);
+        channel.writeAndFlush(addBuddyPacketToServer);
     }
 }

@@ -5,18 +5,15 @@ import com.szu.nettyIM.protocol.packet.Packet;
 import lombok.Data;
 
 /**
- * Created by y_s on 2019/3/10 9:35 AM
+ * Created by Richard.Fu on 2019/4/15
  */
-
-// to accepter
 @Data
-public class AddBuddyResponsePacket extends Packet {
-    String senderName;
-    String acceptName;
-    String message;
+public class SetUserKeyResponsePacket extends Packet {
+
+    private boolean isOk;
 
     @Override
     public Byte getCommand() {
-        return Command.ADD_BUDDY_RESPONSE;
+        return Command.SET_USER_KEY_RESPONSE;
     }
 }

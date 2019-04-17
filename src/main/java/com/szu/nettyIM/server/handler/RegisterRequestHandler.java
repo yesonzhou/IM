@@ -22,7 +22,7 @@ public class RegisterRequestHandler extends SimpleChannelInboundHandler<Register
 
         // 校验
         RegisterResponsePacket registerResponsePacket = new RegisterResponsePacket();
-        if (isIDExist){
+        if (!isIDExist){
             ElasticsearchUtils.addData(json,Constant.INDEX_User,Constant.TYPE_REGISTER,userName);
             registerResponsePacket.setOk(true);
             registerResponsePacket.setMessage("注册成功");

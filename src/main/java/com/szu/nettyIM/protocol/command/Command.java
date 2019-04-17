@@ -31,13 +31,13 @@ public interface Command {
 
     Byte QUIT_GROUP_RESPONSE = 14;
 
-    Byte ADD_BUDDY_REQUEST = 15;
+    Byte ADD_BUDDY_TO_SERVER = 15;
 
-    Byte ADD_BUDDY_RESPONSE = 16;
+    Byte ADD_BUDDY_TO_USER = 16;
 
-    Byte ADD_BUDDY_ASK_REQUEST = 17;
+    Byte ADD_BUDDY_ASK_TO_SERVER = 17;
 
-    Byte ADD_BUDDY_ASK_RESPONSE = 18;
+    Byte ADD_BUDDY_ASK_TO_USER = 18;
 
     Byte MODIFY_ACCOUNT_REQUEST = 19;
 
@@ -62,5 +62,17 @@ public interface Command {
     Byte GROUP_MESSAGE_RESPONSE = 29;
 
     Byte GROUP_MESSAGE_ERROR_RESPONSE = 30;
+
+    Byte GET_USER_KEY_REQUEST = 31;
+
+    Byte GET_USER_KEY_RESPONSE = 32;
+
+    Byte SET_USER_KEY_REQUEST = 33;
+
+    Byte SET_USER_KEY_RESPONSE = 34;
+
+    Byte GET_SERVER_KEY_REQUEST = 35;
+
+    Byte GET_SERVER_KEY_RESPONSE = 36;
 
 }
