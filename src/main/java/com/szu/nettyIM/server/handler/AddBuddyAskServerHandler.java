@@ -11,6 +11,9 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by y_s on 2019/4/11 7:57 PM
  */
@@ -53,10 +56,21 @@ public class AddBuddyAskServerHandler extends
     }
 
 
-    private void addBuddies(String userName, String addUser) {
-        JSONObject json = new JSONObject();
-        json.put(addUser, "基本数据");
-        ElasticsearchUtils.addData(json, Constant.INDEX_User
+    public static void addBuddies(String userName, String addUser) {
+        // 查询好友列表
+        Map<String,Object> strBuddies = ElasticsearchUtils
+                .searchDataById(Constant.INDEX_User, Constant.TYPE_BUDDIES,
+                        userName, null);
+
+        // 如果为空
+        if (null == strBuddies){
+            strBuddies = new HashMap<String,Object>();
+        }
+
+        strBuddies.put(addUser,"基本数据");
+
+        // 添加好友列表到数据库
+        ElasticsearchUtils.addData(strBuddies, Constant.INDEX_User
                 , Constant.TYPE_BUDDIES
                 , userName);
     }

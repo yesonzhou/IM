@@ -33,8 +33,8 @@ import java.util.concurrent.TimeUnit;
 @Service("Client")
 class Client {
     private static final int MAX_RETRY = 5;
-    private static final String HOST = "127.0.0.1"; // 127.0.0.1
-    private static final int PORT = 8000;
+    private static final String HOST = "127.0.0.1"; // 129.204.75.206
+    private static final int PORT = 8080;
 
     public static void main(String[] args) {
         Client client = new Client();

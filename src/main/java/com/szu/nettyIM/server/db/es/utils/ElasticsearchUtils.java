@@ -139,6 +139,26 @@ public class ElasticsearchUtils {
     }
 
     /**
+     * 数据添加，正定ID
+     *
+     * @param objectMap 要增加的数据
+     * @param index      索引，类似数据库
+     * @param type       类型，类似表
+     * @param id         数据ID
+     * @return
+     */
+    public static String addData(Map<String,Object> objectMap, String index, String type, String id) {
+
+        IndexResponse response = client.prepareIndex(index, type, id).setSource(objectMap).get();
+
+        LOGGER.info("addData response status:{},id:{}", response.status().getStatus(), response.getId());
+
+        return response.getId();
+    }
+
+
+
+    /**
      * 数据添加
      *
      * @param jsonObject 要增加的数据

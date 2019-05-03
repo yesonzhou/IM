@@ -25,7 +25,7 @@ import java.util.Date;
  */
 @Service("server")
 class Server {
-    private static final int PORT = 8000;
+    private static final int PORT = 8080;
 
     public void run() {
         NioEventLoopGroup bossGroup = new NioEventLoopGroup();

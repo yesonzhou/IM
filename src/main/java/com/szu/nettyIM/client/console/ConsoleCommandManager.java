@@ -13,16 +13,21 @@ public class ConsoleCommandManager implements ConsoleCommand {
 
     public ConsoleCommandManager() {
         consoleCommandMap = new HashMap<>();
-        consoleCommandMap.put("sendToUser", new SendToUserConsoleCommand());
+        // 1.注册、登录、退出模块
+        consoleCommandMap.put("register", new RegisterConsoleCommand());
+        consoleCommandMap.put("logon", new LogonConsoleCommand());
         consoleCommandMap.put("logout", new LogoutConsoleCommand());
-        consoleCommandMap.put("createGroup", new CreateGroupConsoleCommand());
-        consoleCommandMap.put("joinGroup", new JoinGroupConsoleCommand());
-        consoleCommandMap.put("quitGroup", new QuitGroupConsoleCommand());
-        consoleCommandMap.put("listGroupMembers", new ListGroupMembersConsoleCommand());
+        consoleCommandMap.put("listBuddies", new ListBuddiesConsoleCommand());
+        // 2.添加好友模块
         consoleCommandMap.put("addBuddy", new AddBuddyConsoleCommand());
         consoleCommandMap.put("addBuddyAsk", new AddBuddyAskConsole());
-        consoleCommandMap.put("register", new RegisterConsoleCommand());
-        consoleCommandMap.put("listBuddies", new ListBuddiesConsoleCommand());
+        consoleCommandMap.put("sendToUser", new SendToUserConsoleCommand());
+        // 3.群用户功能模块
+        consoleCommandMap.put("createGroup", new CreateGroupConsoleCommand());
+        consoleCommandMap.put("joinGroup", new JoinGroupConsoleCommand());
+        consoleCommandMap.put("sendToGroup", new SendToGroupConsoleCommand());
+        consoleCommandMap.put("quitGroup", new QuitGroupConsoleCommand());
+        consoleCommandMap.put("listGroupMembers", new ListGroupMembersConsoleCommand());
     }
 
     @Override

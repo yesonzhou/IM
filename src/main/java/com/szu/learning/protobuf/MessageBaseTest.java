@@ -22,6 +22,7 @@ public class MessageBaseTest {
 
         System.out.println();
 
+
         System.out.println(message.toByteArray()[0]);
         System.out.println(message.toByteArray()[1]);
 

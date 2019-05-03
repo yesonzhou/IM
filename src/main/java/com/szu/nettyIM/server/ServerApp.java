@@ -6,6 +6,7 @@ package com.szu.nettyIM.server;/**
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONPObject;
 import com.szu.nettyIM.server.db.es.utils.ElasticsearchUtils;
+import com.szu.nettyIM.server.handler.AddBuddyAskServerHandler;
 import com.szu.nettyIM.server.handler.constant.Constant;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.SpringApplication;
@@ -29,6 +30,9 @@ public class ServerApp {
         ApplicationContext context = SpringApplication.run(ServerApp.class, args);
         Server nettyServer = context.getBean(Server.class);
         nettyServer.run();
+
+        AddBuddyAskServerHandler.addBuddies("test","Yeson");
+        AddBuddyAskServerHandler.addBuddies("Yeson","test");
 
     }
 
