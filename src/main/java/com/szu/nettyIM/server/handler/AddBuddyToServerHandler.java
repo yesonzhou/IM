@@ -29,6 +29,7 @@ public class AddBuddyToServerHandler extends SimpleChannelInboundHandler<AddBudd
         if (isExist) {
             // 构建转发包转发给好友请求中的目标好友
             AddBuddyPacketToUser transPacket = new AddBuddyPacketToUser();
+            transPacket.setAcceptName(accepter);
             transPacket.setSenderName(sender);
             transPacket.setMessage(message);
             Channel buddyChannel = SessionUtil.getChannel(accepter);
