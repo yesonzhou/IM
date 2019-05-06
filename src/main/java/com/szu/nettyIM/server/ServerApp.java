@@ -31,8 +31,6 @@ public class ServerApp {
         Server nettyServer = context.getBean(Server.class);
         nettyServer.run();
 
-        AddBuddyAskServerHandler.addBuddies("test","Yeson");
-        AddBuddyAskServerHandler.addBuddies("Yeson","test");
 
     }
 
